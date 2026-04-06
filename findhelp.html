@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <title>The Digital Divide - Find Help</title>
+</head>
+
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navigation_links">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="healthimpacts.html">Health Impacts</a></li>
+            <li><a href="findhelp.html">Find Help</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+        </ul>
+    </nav>
+
+    <h1>Find Help</h1>
+
+    <p class="find-help-intro">
+    This page provides free and low-cost resources related to healthcare, mental health, and internet access.
+</p>
+
+    <br>
+    <br>
+
+    <img src="teaching_others_tech.jpg" alt="A younger person helping an older adult use technology" class="find-help-image">
+
+<p class="image-caption">
+    Access to healthcare and internet support can make a major difference in people’s daily lives.
+</p>
+    <br>
+    <p class="resources-intro">
+    Browse the categories below to explore different types of support.
+</p>
+
+    <div class="finding_help_sections">
+        <details>
+            <summary>Physical Health Resources</summary>
+            <ul>
+                <li>Free or low-cost clinics in your area</li>
+                <li>Community health centers</li>
+                <li>Local hospitals with financial assistance</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>Mental Health Resources</summary>
+            <ul class="square">
+                <li>988 Suicide & Crisis Lifeline</li>
+                <li>Online therapy services</li>
+                <li>School counselors and community programs</li>
+            </ul>
+        </details>
+
+        <details>
+            <summary>Internet Access Resources</summary>
+            <ul class="circle">
+                <li>Public libraries with free Wi-Fi</li>
+                <li>Low-cost internet programs</li>
+                <li>Community centers with computer access</li>
+            </ul>
+        </details>
+    </div>
+
+    <br>
+
+<h2>Find Local Resources Near You</h2>
+<p class="resources-intro">Select your state or territory to explore nearby support options.</p>
+
+    <div class="state-picker">
+        <label for="stateSelect">Choose your state or territory</label>
+        <select id="stateSelect" class="tool">
+            <option value="">-- Select --</option>
+        </select>
+    </div>
+
+    <div id="resourceResults" class="resource-results"></div>
+
+    <script>
+        const states = [
+            "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California", "Colorado", "Connecticut",
+            "Delaware", "District of Columbia", "Florida", "Georgia", "Guam", "Hawaii", "Idaho", "Illinois",
+            "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts",
+            "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
+            "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota",
+            "Northern Mariana Islands", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico",
+            "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "U.S. Virgin Islands",
+            "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+        ];
+
+        const stateLibraryNames = {
+            "Alabama": "Alabama Public Library Service",
+            "Alaska": "Alaska State Library",
+            "American Samoa": "American Samoa Territorial Library",
+            "Arizona": "Arizona State Library, Archives and Public Records",
+            "Arkansas": "Arkansas State Library",
+            "California": "California State Library",
+            "Colorado": "Colorado State Library",
+            "Connecticut": "Connecticut State Library",
+            "Delaware": "Delaware Libraries",
+            "District of Columbia": "District of Columbia Public Library",
+            "Florida": "Florida Division of Library and Information Services",
+            "Georgia": "Georgia Public Library Service",
+            "Guam": "Guam Public Library System",
+            "Hawaii": "Hawaii State Public Library System",
+            "Idaho": "Idaho Commission for Libraries",
+            "Illinois": "Illinois State Library",
+            "Indiana": "Indiana State Library",
+            "Iowa": "State Library of Iowa",
+            "Kansas": "State Library of Kansas",
+            "Kentucky": "Kentucky Department for Libraries and Archives",
+            "Louisiana": "State Library of Louisiana",
+            "Maine": "Maine State Library",
+            "Maryland": "Maryland State Library Agency",
+            "Massachusetts": "Massachusetts Board of Library Commissioners",
+            "Michigan": "Library of Michigan",
+            "Minnesota": "Minnesota Department of Education Library Services",
+            "Mississippi": "Mississippi Library Commission",
+            "Missouri": "Missouri State Library",
+            "Montana": "Montana State Library",
+            "Nebraska": "Nebraska Library Commission",
+            "Nevada": "Nevada State Library, Archives and Public Records",
+            "New Hampshire": "New Hampshire State Library",
+            "New Jersey": "New Jersey State Library",
+            "New Mexico": "New Mexico State Library",
+            "New York": "New York State Library",
+            "North Carolina": "State Library of North Carolina",
+            "North Dakota": "North Dakota State Library",
+            "Northern Mariana Islands": "Joeten-Kiyu Public Library",
+            "Ohio": "State Library of Ohio",
+            "Oklahoma": "Oklahoma Department of Libraries",
+            "Oregon": "State Library of Oregon",
+            "Pennsylvania": "Office of Commonwealth Libraries",
+            "Puerto Rico": "Puerto Rico library resources",
+            "Rhode Island": "Office of Library and Information Services",
+            "South Carolina": "South Carolina State Library",
+            "South Dakota": "South Dakota State Library",
+            "Tennessee": "Tennessee State Library and Archives",
+            "Texas": "Texas State Library and Archives Commission",
+            "U.S. Virgin Islands": "U.S. Virgin Islands library resources",
+            "Utah": "Utah State Library Division",
+            "Vermont": "Vermont Department of Libraries",
+            "Virginia": "Library of Virginia",
+            "Washington": "Washington State Library",
+            "West Virginia": "West Virginia Library Commission",
+            "Wisconsin": "Wisconsin Department of Public Instruction Library Services",
+            "Wyoming": "Wyoming State Library"
+        };
+
+        const select = document.getElementById("stateSelect");
+        const results = document.getElementById("resourceResults");
+
+        states.forEach(state => {
+            const option = document.createElement("option");
+            option.value = state;
+            option.textContent = state;
+            select.appendChild(option);
+        });
+
+        function makeGoogleSearchUrl(query) {
+            return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        }
+
+        function makeGoogleMapsUrl(query) {
+            return `https://www.google.com/maps/search/${encodeURIComponent(query)}`;
+        }
+
+        select.addEventListener("change", function () {
+            const state = this.value;
+
+            if (!state) {
+                results.innerHTML = "";
+                return;
+            }
+
+            const libraryAgency = stateLibraryNames[state] || `${state} state library`;
+            const libraryAgencySearch = makeGoogleSearchUrl(`${libraryAgency} official site`);
+            const publicLibrariesMap = makeGoogleMapsUrl(`public libraries in ${state}`);
+            const wifiMap = makeGoogleMapsUrl(`free wifi libraries and community centers in ${state}`);
+            const communityHelpSearch = makeGoogleSearchUrl(`211 community help ${state}`);
+            const digitalInclusionSearch = makeGoogleSearchUrl(`digital inclusion programs ${state}`);
+            const lowCostInternetSearch = makeGoogleSearchUrl(`low cost internet programs ${state}`);
+            const healthCenterSearch = makeGoogleSearchUrl(`community health centers in ${state}`);
+            const mentalHealthSearch = makeGoogleSearchUrl(`mental health resources in ${state}`);
+
+            results.innerHTML = `
+                <div class="resource-card">
+                    <h3>${state} Resource Hub</h3>
+                    <ul>
+                        <li><a href="${libraryAgencySearch}" target="_blank">Official statewide library agency</a></li>
+                        <li><a href="${publicLibrariesMap}" target="_blank">Find public libraries near you</a></li>
+                        <li><a href="${wifiMap}" target="_blank">Find places with free Wi-Fi</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Community and Internet Help</h3>
+                    <ul>
+                        <li><a href="${communityHelpSearch}" target="_blank">Find local 211 and community help</a></li>
+                        <li><a href="${digitalInclusionSearch}" target="_blank">Find digital inclusion programs</a></li>
+                        <li><a href="${lowCostInternetSearch}" target="_blank">Find low-cost internet programs</a></li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Health and Mental Health</h3>
+                    <ul>
+                        <li><a href="${healthCenterSearch}" target="_blank">Find community health centers</a></li>
+                        <li><a href="${mentalHealthSearch}" target="_blank">Find mental health resources</a></li>
+                    </ul>
+                </div>
+            `;
+        });
+    </script>
+</body>
+
+</html>
