@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <title>The Digital Divide - Health Impacts</title>
+</head>
+
+<body>
+    <!---NAVIGATION-->
+    <nav class="navigation_links">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="healthimpacts.html">Health Impacts</a></li>
+            <li><a href="findhelp.html">Find Help</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+        </ul>
+    </nav>
+    <h1>The Effects of the Digital Divide on Healthcare</h1>
+
+<p class="page-intro">
+    The digital divide affects more than internet access. It also affects how people find doctors, schedule appointments, use telehealth, learn about treatment options, and access health insurance information.
+</p>
+
+<section class="impact-section">
+    <h2>Why does this matter?</h2>
+    <p class="impact-explainer">
+        When people do not have reliable internet or the skills to use it, they may struggle to get timely healthcare. This can lead to delayed treatment, worse health outcomes, and deeper inequality between communities.
+    </p>
+</section>
+ <img src = "stressed_from_no_tech.png" alt = "Image of an individual writing an essay stressed out without technology." class = "stressed">
+
+<section class="impact-grid">
+    <div class="impact-card">
+        <h3>Limited Healthcare Access</h3>
+        <p>People in low-income, elderly, and rural communities may have fewer ways to reach healthcare providers online.</p>
+    </div>
+
+    <div class="impact-card">
+        <h3>Difficulty Finding Affordable Care</h3>
+        <p>Without strong internet access, people may miss lower-cost healthcare options, programs, or nearby services.</p>
+    </div>
+
+    <div class="impact-card">
+        <h3>Lack of Digital Skills</h3>
+        <p>Some people may not know how to use healthcare portals, telehealth platforms, or online insurance tools.</p>
+    </div>
+
+    <div class="impact-card">
+        <h3>Delayed Treatment</h3>
+        <p>When access to care is already limited, lack of internet can make health problems worse over time.</p>
+    </div>
+
+    <div class="impact-card">
+        <h3>Wider Health Disparities</h3>
+        <p>The digital divide increases the gap between people who can easily access care and those who cannot.</p>
+    </div>
+
+    <div class="impact-card">
+        <h3>Rural Appointment Barriers</h3>
+        <p>In some rural areas, both physical and mental health appointments may already be limited, and poor internet makes access even harder.</p>
+    </div>
+</section>
+
+<hr>
+
+<h2>If these challenges affect you or your community, explore possible solutions below.</h2>
+
+<a href="solutions.html" class="cta-button">View Solutions</a>
+
+
+</body>
+
+</html>
